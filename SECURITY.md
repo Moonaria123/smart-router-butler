@@ -1,42 +1,44 @@
-# 安全策略
+# Security Policy
 
-## 支持的版本
+## Supported versions
 
-| 范围 | 说明 |
-|------|------|
-| **安全修复** | 优先针对 `main` 分支最新提交；若需，维护者可能将修复 backport 至最近发布标签（视严重程度与资源而定） |
-| **不受支持** | 已归档版本、未在文档中声明的分支；请自行评估风险 |
+| Scope | Policy |
+|-------|--------|
+| **Security fixes** | Preferably applied to the latest commit on `main`. Maintainers may backport fixes to the most recent release tag depending on severity and capacity. |
+| **Unsupported** | Archived versions and branches not documented in this repository; use at your own risk. |
 
-## 报告漏洞（负责任披露）
+## Reporting a vulnerability (responsible disclosure)
 
-若你发现**可利用的安全漏洞**（例如未授权访问、密钥材料泄露路径、远程代码执行、身份认证绕过），请**不要**在公开 Issue、讨论区或社交媒体披露可利用细节。
+If you discover a **security vulnerability** (e.g. unauthorized access, exposure of key material, remote code execution, authentication bypass), **do not** disclose exploitable details in public Issues, Discussions, or social media.
 
-### 推荐渠道
+### Preferred channels
 
-1. **GitHub Private vulnerability reporting**（推荐）：仓库 **Security → Report a vulnerability**（需仓库启用该功能）。  
-2. **邮件**：若维护者在 README 或本文件底部公布了安全联系邮箱，请使用标题前缀 `[SECURITY]` 发送。  
-3. **维护者私信**：仅在 GitHub 已提供可验证的联系方式时使用。
+1. **GitHub private vulnerability reporting** (recommended): **Security → Report a vulnerability** on this repository (must be enabled for the repo).
+2. **Email**: If maintainers list a security contact email in the README or at the bottom of this file, send mail with the subject prefix `[SECURITY]`.
+3. **Direct message to maintainers**: Only if verifiable contact information is published on GitHub.
 
-### 报告内容（建议）
+### What to include
 
-- 受影响版本、commit 或标签（若已知）  
-- 复现步骤与最小化证明（PoC 可酌情提供）  
-- 潜在影响与受影响组件  
-- 是否已知被利用（若可公开说明）
+- Affected versions, commits, or tags (if known)
+- Steps to reproduce and a minimal proof of concept (PoC) when appropriate
+- Potential impact and affected components
+- Whether the issue is known to be exploited in the wild (if you can say so safely)
 
-### 响应预期
+### What to expect
 
-维护者会尽力在合理时间内确认收到；**不保证**具体修复 SLA。严重漏洞修复后可能通过 **GitHub Security Advisory** 与 **Release** 发布。
+Maintainers will try to acknowledge reports in a reasonable timeframe. **No specific SLA is guaranteed.** Critical fixes may be published via **GitHub Security Advisories** and **Releases**.
 
-### 协调披露
+### Coordinated disclosure
 
-在修复可用或维护者明确同意前，请避免公开漏洞细节，以便用户有时间升级。
+Please avoid public disclosure of vulnerability details until a fix is available or maintainers explicitly agree, so users have time to upgrade.
 
-## 非安全问题
+## Non-security issues
 
-以下请使用 **Issues**（勿使用安全通道）：
+Use **[Issues](https://github.com/Moonaria123/smart-router-butler/issues)** (not the security channel) for:
 
-- 配置疑问、功能建议、一般 Bug（非安全边界）  
-- 依赖项的已知 CVE（可先提交 PR 升级依赖）
+- Configuration questions, feature requests, and general bugs that are not security-sensitive
+- Known CVEs in dependencies (you may open a PR to bump dependencies)
 
-- Issues（非安全类）：https://github.com/Moonaria123/smart-router-butler/issues
+## Security contact
+
+If a dedicated security email is published in the repository **README** or in organization documentation, use it with the `[SECURITY]` subject prefix. Otherwise, use **GitHub private vulnerability reporting** (above).

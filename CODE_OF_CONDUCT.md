@@ -1,46 +1,52 @@
-# 社区行为准则
+# Contributor Covenant Code of Conduct
 
-## 我们的承诺
+## Our Pledge
 
-为营造开放、包容的环境，我们作为贡献者与维护者承诺：参与本项目的每个人都不受骚扰，无论其年龄、体型、可见或不可见的身体特征、民族、性征、性别认同与表达、经验水平、教育程度、社会经济地位、国籍、外貌、种族、种姓、肤色、宗教或性取向如何。
+We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, caste, color, religion, or sexual identity and orientation.
 
-## 我们的标准
+We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
 
-有助于营造积极环境的行为示例：
+## Our Standards
 
-- 使用友好、包容的语言  
-- 尊重不同的观点与经验  
-- 虚心接受建设性批评  
-- 关注对社区最有利的事情  
-- 对其他社区成员保持同理心  
+Examples of behavior that contributes to a positive environment for our community include:
 
-不可接受的行为示例：
+- Demonstrating empathy and kindness toward other people
+- Being respectful of differing opinions, viewpoints, and experiences
+- Giving and gracefully accepting constructive feedback
+- Accepting responsibility and apologizing to those affected by our mistakes, and learning from the experience
+- Focusing on what is best not just for us as individuals, but for the overall community
 
-- 使用性化的语言或图像，以及不受欢迎的性关注或性暗示  
-- 挑衅、侮辱/贬损性评论、人身或政治攻击  
-- 公开或私下骚扰  
-- 未经明确许可发布他人的私人信息（如物理地址、电子邮箱）  
-- 其他在专业环境中可合理认定为不当的行为  
+Examples of unacceptable behavior include:
 
-## 执行职责
+- The use of sexualized language or imagery, and sexual attention or advances of any kind
+- Trolling, insulting or derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others’ private information, such as a physical or email address, without their explicit permission
+- Other conduct which could reasonably be considered inappropriate in a professional setting
 
-维护者负责阐明可接受行为标准，并对已认定不当、威胁、冒犯或有害的行为采取合理、适当的纠正措施。
+## Enforcement Responsibilities
 
-维护者有权利和责任删除、编辑或拒绝与本行为准则不符的评论、提交、代码、Wiki 编辑、问题与其他贡献，并在适当时机向行为管理方报告原因。
+Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
 
-## 适用范围
+Community leaders have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, and will communicate reasons for moderation decisions when appropriate.
 
-本准则适用于所有项目空间，包括仓库、Issue、Discussions、Pull Request、Wiki 以及个人在公开场合代表本项目的场合。
+## Scope
 
-## 执行
+This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public spaces. Examples of representing our community include using an official email address, posting via an official social media account, or acting as an appointed representative at an online or offline event.
 
-可通过仓库 **SECURITY.md** 或 GitHub **私信维护者**（若已公开联系方式）报告辱骂、骚扰或其他不可接受行为。维护团队将审查并调查全部投诉，并以认为适当的方式回应。对报告事件者有保密义务。
+## Enforcement
 
-未切实遵守或执行本行为准则的维护者，经其他成员领导层一致决定，可暂时或永久终止其参与本项目的权利。
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at the contact points described in [SECURITY.md](SECURITY.md), or via GitHub direct message if maintainers have published verifiable contact information.
 
-## 来源
+All complaints will be reviewed and investigated promptly and fairly.
 
-本行为准则改编自 [Contributor Covenant][homepage] 2.1，见 [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v21]。
+All community leaders are obligated to respect the privacy and security of the reporter of any incident.
+
+Community leaders who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project’s leadership.
+
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 2.1, available at [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v21].
 
 [homepage]: https://www.contributor-covenant.org
 [v21]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
