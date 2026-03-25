@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./docs/images/hero-banner.jpg" alt="Smart Router Butler" width="720" />
+<img src="./docs/images/hero-banner.jpg" alt="Smart Router Butler" width="100%" />
 
 # 🦞 Smart Router Butler
 
@@ -64,8 +64,6 @@
 
 **Smart Router Butler** 将「选哪个模型」变成了一个**可策略化、可热更新**的配置问题。它作为你的本地代理层，接管所有 LLM 请求，并根据你设定的规则和语义智能分发。
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## ✨ 核心特性
@@ -79,8 +77,6 @@
 - 🔒 **100% 数据掌控** — 完全自托管，数据不下车；API Key 采用 AES-256-GCM 加密存储，拒绝第三方网关的隐私风险。
 - ⚡ **极致性能** — L1 规则引擎内存同步匹配（<2ms），全程支持 SSE 流式透传，无感接入。
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 🎯 规则创建 — 三种方式构建你的路由策略
@@ -92,7 +88,7 @@ Smart Router Butler 提供三种创建路由规则的方式，从完全手动到
 通过 Web 控制台可视化创建规则，无需编写代码。支持按任务类型、关键词、Token 数量、模型偏好等多种条件组合；可设置优先级、目标模型及最多 3 个 Fallback 备选模型。规则保存后通过热更新立即生效。
 
 <div align="center">
-<img src="./docs/images/screenshot-rule-editor.png" width="680" alt="自定义规则编辑器" />
+<img src="./docs/images/screenshot-rule-editor.png" alt="自定义规则编辑器" />
 </div>
 
 **示例 — 将编码任务路由到代码专用模型：**
@@ -112,7 +108,7 @@ Smart Router Butler 提供三种创建路由规则的方式，从完全手动到
 用自然语言描述你的路由需求，内置 LLM 自动将其翻译为结构化规则。适合知道自己想要什么、但不想逐一配置字段的用户。
 
 <div align="center">
-<img src="./docs/images/screenshot-nl-generator.png" width="680" alt="自然语言规则生成器" />
+<img src="./docs/images/screenshot-nl-generator.png" alt="自然语言规则生成器" />
 </div>
 
 **示例提示词：**
@@ -130,7 +126,7 @@ Smart Router Butler 提供三种创建路由规则的方式，从完全手动到
 5 步交互式向导，引导你选择使用场景、首选供应商、预算偏好和优先级，然后自动生成一套完整的初始规则集。
 
 <div align="center">
-<img src="./docs/images/screenshot-ai-wizard.png" width="680" alt="AI 问卷向导" />
+<img src="./docs/images/screenshot-ai-wizard.png" alt="AI 问卷向导" />
 </div>
 
 **向导步骤：**
@@ -142,8 +138,6 @@ Smart Router Butler 提供三种创建路由规则的方式，从完全手动到
 5. **预览并应用** — 查看所有生成的规则，按需调整后一键激活
 
 非常适合首次部署 — 从零规则到完整可运行的路由策略，不到 2 分钟。
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
@@ -181,13 +175,18 @@ Model:     auto          （由路由器智能决策）
 
 **所有流量在本地转发**：`Agent → localhost:8080 → 上游 Provider API`。代理运行在你的机器或 Docker 主机上，请求不经过任何第三方网关或外部中转节点。
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 🔍 路由层级详解
 
 当 `model` 设为 `auto` 时，请求依次经过五个决策层。第一个命中的层级立即返回结果，未命中则传递到下一层。
+
+<div align="center">
+<img src="./docs/images/mermaid-routing-cn.jpg" alt="路由决策流程" />
+</div>
+
+<details>
+<summary>Mermaid 源码（桌面端 GitHub 可交互渲染）</summary>
 
 ```mermaid
 graph TD
@@ -204,6 +203,8 @@ graph TD
     L3 -->|未命中| Fallback["兜底：第一个启用的模型"]
     Fallback --> Resolve
 ```
+
+</details>
 
 ### L0 — 精确缓存
 
@@ -251,16 +252,20 @@ graph TD
 
 若所有层级均未命中，系统从数据库中选取**第一个启用的模型**作为默认目标，并异步递增 `L3_FALLBACK` 计数器以便在控制台中监控。
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 🏗️ 架构概览
 
+<div align="center">
+<img src="./docs/images/mermaid-arch-cn.jpg" alt="架构概览" />
+</div>
+
+<details>
+<summary>Mermaid 源码（桌面端 GitHub 可交互渲染）</summary>
+
 ```mermaid
 graph TD
     Client[客户端 / AI Agent] -->|OpenAI 兼容 API| Proxy(Node.js 代理层)
-    
     subgraph decisionChain [决策与缓存链]
         Proxy --> L0{L0 精确缓存}
         L0 -->|未命中| L05{L0.5 语义缓存}
@@ -268,19 +273,16 @@ graph TD
         L1 -->|未命中| L2{L2 语义路由}
         L2 -->|未命中| L3{L3 本地模型仲裁}
     end
-    
     L3 -->|决策结果| Dispatch(请求分发)
     L1 -->|命中| Dispatch
     L2 -->|命中| Dispatch
-    
     Dispatch -->|SSE 流式透传| Cloud[云端 LLM Providers]
     Dispatch -->|SSE 流式透传| Local[本地 LLM / Ollama]
-    
     Proxy -.->|异步写日志| DB[(PostgreSQL)]
     Proxy -.->|异步写缓存| Redis[(Redis)]
 ```
 
----
+</details>
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
@@ -290,23 +292,21 @@ graph TD
 
 | 路由规则管理 | 自然语言生成规则 |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-rules.png" width="480" /> | <img src="./docs/images/screenshot-nl-generator.png" width="480" /> |
+| <img src="./docs/images/screenshot-rules.png" /> | <img src="./docs/images/screenshot-nl-generator.png" /> |
 
 | 规则命中分析 | 规则编辑器 |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-hit-analysis.png" width="480" /> | <img src="./docs/images/screenshot-rule-editor.png" width="480" /> |
+| <img src="./docs/images/screenshot-hit-analysis.png" /> | <img src="./docs/images/screenshot-rule-editor.png" /> |
 
 | AI 规则向导 | 请求日志 |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-ai-wizard.png" width="480" /> | <img src="./docs/images/screenshot-request-logs.png" width="480" /> |
+| <img src="./docs/images/screenshot-ai-wizard.png" /> | <img src="./docs/images/screenshot-request-logs.png" /> |
 
 | Raw JSON 编辑器 |
 |:---:|
-| <img src="./docs/images/screenshot-raw-json.png" width="480" /> |
+| <img src="./docs/images/screenshot-raw-json.png" /> |
 
 </div>
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
@@ -358,8 +358,6 @@ graph TD
 
 在 `proxy/`、`dashboard/` 执行 `npm ci` 时，`.npmrc` 仅影响**依赖包**下载源，**不能**替代 `git clone`。Dockerfile 会复制 `.npmrc`；Router 使用 `pip install -r requirements.txt`。
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## ⚙️ 配置说明（摘要）
@@ -372,8 +370,6 @@ graph TD
 | 预构建镜像 | `GHCR_OWNER`、`SMARTROUTER_IMAGE_TAG` |
 
 **切勿**将 `.env`、API Key 或生产连接串提交到 Git。
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
@@ -388,8 +384,6 @@ graph TD
 | **合规性** | 依赖供应商条款，受限于地域 | **可部署在自有网络**，满足最严格的企业合规要求 |
 | **成本控制** | 平台抽成或固定月费 | **零平台费**，按需路由最大化榨干免费/廉价模型价值 |
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 📂 仓库结构（节选）
@@ -400,8 +394,6 @@ graph TD
 | `router/` | FastAPI：语义路由、缓存、L3 相关 |
 | `dashboard/` | Next.js：规则、Provider、日志 |
 | `contracts/` | 服务间契约 |
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
@@ -418,8 +410,6 @@ python -m mypy app/ --strict && python -m ruff check app/
 npm run type-check && npm run lint
 ```
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 🗺️ 路线图
@@ -435,8 +425,6 @@ npm run type-check && npm run lint
 
 > 有功能建议？欢迎 [提交 Issue](https://github.com/Moonaria123/smart-router-butler/issues) 描述你的使用场景。
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## ⚖️ 开源治理与合规
@@ -450,8 +438,6 @@ npm run type-check && npm run lint
 
 参与 Issue、PR、讨论前请阅读 **行为准则**。维护者保留对破坏性、骚扰性内容采取管理措施的权利。
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 🛡️ 安全与隐私
@@ -460,15 +446,11 @@ npm run type-check && npm run lint
 - **部署与数据**：本软件**自托管**运行；用户提示词、响应、日志与密钥**由部署者**在自有基础设施上管理；**请自行**审阅与上游 LLM 提供商的服务条款及数据驻留政策。  
 - **供应链**：建议在生产使用锁定版本的镜像与依赖（`package-lock.json`、`requirements.txt`），并关注依赖安全公告。  
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 🤝 贡献
 
 欢迎 Issue 与 Pull Request，详见 [**CONTRIBUTING.md**](CONTRIBUTING.md)。贡献即表示你同意 [**CODE_OF_CONDUCT.md**](CODE_OF_CONDUCT.md) 与 [**LICENSE**](LICENSE) 下的许可安排。
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
@@ -477,8 +459,6 @@ npm run type-check && npm run lint
 - 软件在 [**MIT License**](LICENSE) 下发布。  
 - **按原样提供（AS IS）**：不作适销性、特定用途适用性、非侵权等明示或默示担保；**使用本软件的风险由使用者自行承担**。  
 - **间接损害**：在法律允许范围内，作者与贡献者不对任何间接、偶然、特殊或后果性损害承担责任。  
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
@@ -493,8 +473,6 @@ Smart Router Butler 基于以下优秀的开源项目构建：
 - [Prisma](https://www.prisma.io/) — 数据库 ORM
 - [Redis](https://redis.io/) — 内存缓存
 - [PostgreSQL](https://www.postgresql.org/) — 持久化存储
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 

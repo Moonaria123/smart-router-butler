@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./docs/images/hero-banner.jpg" alt="Smart Router Butler" width="720" />
+<img src="./docs/images/hero-banner.jpg" alt="Smart Router Butler" width="100%" />
 
 # 🦞 Smart Router Butler
 
@@ -64,8 +64,6 @@ When using AI agents (OpenClaw, Cursor, Continue, etc.) and IDE-assisted coding 
 
 **Smart Router Butler** turns "which model to use" into a **policy-driven, hot-reloadable** configuration problem. It acts as your local proxy layer, intercepts all LLM requests, and intelligently dispatches them based on your rules and semantic understanding.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## ✨ Core Features
@@ -79,8 +77,6 @@ When using AI agents (OpenClaw, Cursor, Continue, etc.) and IDE-assisted coding 
 - **100% data control** — Fully self-hosted, data never leaves your infrastructure. API keys encrypted with AES-256-GCM — no third-party gateway privacy risks.
 - **Blazing performance** — L1 rule engine matches in-memory synchronously (<2ms). Full SSE streaming passthrough for zero-latency feel.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## 🎯 Rule Creation — Three Ways to Build Your Routing Strategy
@@ -92,7 +88,7 @@ Smart Router Butler provides three distinct approaches to creating routing rules
 Build rules visually through the web dashboard — no code required. Define conditions based on task type, keywords, token count, model preferences, and more; set priority, target model, and up to 3 fallback models per rule. Rules take effect immediately via hot-reload.
 
 <div align="center">
-<img src="./docs/images/screenshot-rule-editor.png" width="680" alt="Custom Rule Editor" />
+<img src="./docs/images/screenshot-rule-editor.png" alt="Custom Rule Editor" />
 </div>
 
 **Example — Route coding tasks to a code-specialized model:**
@@ -112,7 +108,7 @@ Once saved, any request classified as a coding task automatically goes to the co
 Describe your routing intent in plain language, and the built-in LLM translates it into structured rules automatically. Ideal for users who know what they want but prefer not to configure fields manually.
 
 <div align="center">
-<img src="./docs/images/screenshot-nl-generator.png" width="680" alt="Natural Language Rule Generator" />
+<img src="./docs/images/screenshot-nl-generator.png" alt="Natural Language Rule Generator" />
 </div>
 
 **Example prompts:**
@@ -130,7 +126,7 @@ Type a sentence, click **Generate rules**, and the system produces one or more r
 A 5-step interactive wizard that walks you through your use cases, preferred providers, budget, and priorities — then automatically generates a complete initial rule set tailored to your needs.
 
 <div align="center">
-<img src="./docs/images/screenshot-ai-wizard.png" width="680" alt="AI Rule Wizard" />
+<img src="./docs/images/screenshot-ai-wizard.png" alt="AI Rule Wizard" />
 </div>
 
 **Wizard steps:**
@@ -142,8 +138,6 @@ A 5-step interactive wizard that walks you through your use cases, preferred pro
 5. **Review & apply** — Preview all generated rules, tweak if needed, then activate
 
 Perfect for first-time setup — go from zero rules to a fully operational routing strategy in under 2 minutes.
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
@@ -181,13 +175,18 @@ Model:     auto          (let the router decide)
 
 **All traffic stays local**: `Agent → localhost:8080 → upstream provider API`. The proxy runs on your machine or your Docker host; no request is rerouted through any third-party gateway or external relay.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## 🔍 Routing Layers Deep Dive
 
 When `model` is set to `auto`, the request passes through five decision layers in order. The first layer to produce a match wins. Each miss passes control to the next layer.
+
+<div align="center">
+<img src="./docs/images/mermaid-routing-en.jpg" alt="Routing Decision Flow" />
+</div>
+
+<details>
+<summary>Mermaid source (interactive on GitHub desktop)</summary>
 
 ```mermaid
 graph TD
@@ -204,6 +203,8 @@ graph TD
     L3 -->|miss| Fallback["Fallback: first enabled model"]
     Fallback --> Resolve
 ```
+
+</details>
 
 ### L0 — Exact Cache
 
@@ -251,16 +252,20 @@ Rules are evaluated in **priority descending** order (0–1000). The first match
 
 If all layers miss, the system selects the **first enabled model** from the database as the default target. A `L3_FALLBACK` counter is incremented asynchronously for monitoring via the dashboard.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## 🏗️ Architecture Overview
 
+<div align="center">
+<img src="./docs/images/mermaid-arch-en.jpg" alt="Architecture Overview" />
+</div>
+
+<details>
+<summary>Mermaid source (interactive on GitHub desktop)</summary>
+
 ```mermaid
 graph TD
     Client["Client / AI Agent"] -->|"OpenAI-compatible API"| Proxy("Node.js Proxy")
-    
     subgraph decisionChain ["Decision & Cache Chain"]
         Proxy --> L0{"L0 Exact Cache"}
         L0 -->|miss| L05{"L0.5 Semantic Cache"}
@@ -268,19 +273,16 @@ graph TD
         L1 -->|miss| L2{"L2 Semantic Route"}
         L2 -->|miss| L3{"L3 Local Model Arbiter"}
     end
-    
     L3 -->|decision| Dispatch("Request Dispatch")
     L1 -->|hit| Dispatch
     L2 -->|hit| Dispatch
-    
     Dispatch -->|"SSE streaming"| Cloud["Cloud LLM Providers"]
     Dispatch -->|"SSE streaming"| Local["Local LLM / Ollama"]
-    
     Proxy -.->|"async logging"| DB[("PostgreSQL")]
     Proxy -.->|"async caching"| Redis[("Redis")]
 ```
 
----
+</details>
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
@@ -290,23 +292,21 @@ graph TD
 
 | Routing Rules | Natural Language Rule Generator |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-rules.png" width="480" /> | <img src="./docs/images/screenshot-nl-generator.png" width="480" /> |
+| <img src="./docs/images/screenshot-rules.png" /> | <img src="./docs/images/screenshot-nl-generator.png" /> |
 
 | Rule Hit Analysis | Rule Editor |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-hit-analysis.png" width="480" /> | <img src="./docs/images/screenshot-rule-editor.png" width="480" /> |
+| <img src="./docs/images/screenshot-hit-analysis.png" /> | <img src="./docs/images/screenshot-rule-editor.png" /> |
 
 | AI Rule Wizard | Request Logs |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-ai-wizard.png" width="480" /> | <img src="./docs/images/screenshot-request-logs.png" width="480" /> |
+| <img src="./docs/images/screenshot-ai-wizard.png" /> | <img src="./docs/images/screenshot-request-logs.png" /> |
 
 | Raw JSON Editor |
 |:---:|
-| <img src="./docs/images/screenshot-raw-json.png" width="480" /> |
+| <img src="./docs/images/screenshot-raw-json.png" /> |
 
 </div>
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
@@ -358,8 +358,6 @@ See `docker-compose.yml`, `docker-compose.release.yml`, and sub-directory README
 
 When running `npm ci` in `proxy/` or `dashboard/`, the `.npmrc` file only affects the **dependency package** download source — it does **not** replace `git clone`. Dockerfiles copy `.npmrc` automatically. The router uses `pip install -r requirements.txt`.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## ⚙️ Configuration Summary
@@ -372,8 +370,6 @@ When running `npm ci` in `proxy/` or `dashboard/`, the `.npmrc` file only affect
 | Pre-built images | `GHCR_OWNER`, `SMARTROUTER_IMAGE_TAG` |
 
 **Never** commit `.env`, API keys, or production connection strings to Git.
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
@@ -388,8 +384,6 @@ When running `npm ci` in `proxy/` or `dashboard/`, the `.npmrc` file only affect
 | **Compliance** | Dependent on vendor terms, region-locked | **Deploy on your own network**, meets the strictest enterprise requirements |
 | **Cost control** | Platform fees or fixed monthly charges | **Zero platform fees**, route on-demand to maximize free/cheap model value |
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## 📂 Repository Structure
@@ -400,8 +394,6 @@ When running `npm ci` in `proxy/` or `dashboard/`, the `.npmrc` file only affect
 | `router/` | FastAPI: semantic routing, caching, L3 integration |
 | `dashboard/` | Next.js: rules, providers, logs, settings |
 | `contracts/` | Inter-service contracts |
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
@@ -418,8 +410,6 @@ python -m mypy app/ --strict && python -m ruff check app/
 npm run type-check && npm run lint
 ```
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## 🗺️ Roadmap
@@ -435,8 +425,6 @@ The following features are under consideration or active development:
 
 > Have a feature request? [Open an issue](https://github.com/Moonaria123/smart-router-butler/issues) and describe your use case.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## ⚖️ Open-Source Governance
@@ -450,8 +438,6 @@ The following features are under consideration or active development:
 
 Please read the **Code of Conduct** before participating in Issues, PRs, or Discussions. Maintainers reserve the right to moderate disruptive or harassing content.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## 🛡️ Security & Privacy
@@ -460,15 +446,11 @@ Please read the **Code of Conduct** before participating in Issues, PRs, or Disc
 - **Deployment & data**: This software is **self-hosted**. User prompts, responses, logs, and keys are managed **by the deployer** on their own infrastructure. **You are responsible** for reviewing upstream LLM provider terms of service and data residency policies.
 - **Supply chain**: We recommend locking image and dependency versions (`package-lock.json`, `requirements.txt`) in production and monitoring security advisories.
 
----
-
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
 ## 🤝 Contributing
 
 Issues and Pull Requests are welcome — see [**CONTRIBUTING.md**](CONTRIBUTING.md). By contributing, you agree to the [**CODE_OF_CONDUCT.md**](CODE_OF_CONDUCT.md) and the licensing terms in [**LICENSE**](LICENSE).
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
@@ -477,8 +459,6 @@ Issues and Pull Requests are welcome — see [**CONTRIBUTING.md**](CONTRIBUTING.
 - Released under the [**MIT License**](LICENSE).
 - **Provided "AS IS"**: No warranties of merchantability, fitness for a particular purpose, or non-infringement — **use at your own risk**.
 - **Limitation of liability**: To the extent permitted by law, authors and contributors shall not be liable for any indirect, incidental, special, or consequential damages.
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
@@ -493,8 +473,6 @@ Smart Router Butler is built on the shoulders of these great open-source project
 - [Prisma](https://www.prisma.io/) — Database ORM
 - [Redis](https://redis.io/) — In-memory cache
 - [PostgreSQL](https://www.postgresql.org/) — Persistent storage
-
----
 
 <p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
