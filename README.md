@@ -233,7 +233,7 @@ This is where **your custom routing rules** take effect. Rules are loaded into m
 | `maxLatency` | Provider average latency <= threshold |
 | `providerHealth` | Provider health status matches |
 
-Rules are evaluated in **priority descending** order (0–1000). The first match wins and returns the rule's `targetModel` plus an optional fallback chain of up to 3 models. You can create rules via the visual editor, natural language generator, or AI wizard (see [Rule Creation](#rule-creation--three-ways-to-build-your-routing-strategy) above).
+Rules are evaluated in **priority descending** order (0–1000). The first match wins and returns the rule's `targetModel` plus an optional fallback chain of up to 3 models. You can create rules via the visual editor, natural language generator, or AI wizard (see [Rule Creation](#-rule-creation--three-ways-to-build-your-routing-strategy) above).
 
 ### L2 — Semantic Route
 
