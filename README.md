@@ -2,7 +2,7 @@
 
 <img src="./docs/images/hero-banner.jpg" alt="Smart Router Butler" width="100%" />
 
-# 🦞 Smart Router Butler
+# <img src="./docs/images/brand-icon.png" alt="" width="36" height="36" /> Smart Router Butler
 
 **One interface, every model at your command. Your local AI routing butler.**
 

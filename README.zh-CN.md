@@ -2,7 +2,7 @@
 
 <img src="./docs/images/hero-banner.jpg" alt="Smart Router Butler" width="100%" />
 
-# 🦞 Smart Router Butler
+# <img src="./docs/images/brand-icon.png" alt="" width="36" height="36" /> Smart Router Butler
 
 **一个接口，万模随心。你的本地 AI 智能路由管家。**
 
