@@ -34,7 +34,9 @@
 - [💡 Why Smart Router Butler?](#-why-smart-router-butler)
 - [✨ Core Features](#-core-features)
 - [🎯 Rule Creation — Three Ways](#-rule-creation--three-ways-to-build-your-routing-strategy)
-- [🏗️ Architecture & Routing Decision Chain](#%EF%B8%8F-architecture--routing-decision-chain)
+- [🔌 OpenAI-Compatible Local Proxy](#-openai-compatible-local-proxy)
+- [🔍 Routing Layers Deep Dive](#-routing-layers-deep-dive)
+- [🏗️ Architecture Overview](#%EF%B8%8F-architecture-overview)
 - [📸 UI Preview](#-ui-preview)
 - [🚀 Quick Start (Self-Hosted)](#-quick-start-self-hosted)
 - [⚙️ Configuration Summary](#%EF%B8%8F-configuration-summary)
@@ -143,7 +145,9 @@ Perfect for first-time setup — go from zero rules to a fully operational routi
 
 ---
 
-## OpenAI-Compatible Local Proxy
+<p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
+
+## 🔌 OpenAI-Compatible Local Proxy
 
 Smart Router Butler is purpose-built for AI agents like **OpenClaw**, **Cursor**, **Continue**, **ChatBox**, and any tool that speaks the OpenAI API protocol. Integration requires **zero plugins and zero SDK modifications** — configure a local URL and token, and you're done.
 
@@ -179,7 +183,9 @@ Model:     auto          (let the router decide)
 
 ---
 
-## Routing Layers Deep Dive
+<p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
+
+## 🔍 Routing Layers Deep Dive
 
 When `model` is set to `auto`, the request passes through five decision layers in order. The first layer to produce a match wins. Each miss passes control to the next layer.
 
@@ -247,9 +253,9 @@ If all layers miss, the system selects the **first enabled model** from the data
 
 ---
 
-<p align="right"><a href="#smart-router-butler">⬆ Back to Top</a></p>
+<p align="right"><a href="#-smart-router-butler">⬆ Back to Top</a></p>
 
-## Architecture Overview
+## 🏗️ Architecture Overview
 
 ```mermaid
 graph TD

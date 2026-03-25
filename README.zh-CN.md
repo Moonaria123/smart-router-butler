@@ -34,7 +34,9 @@
 - [💡 为什么需要 Smart Router Butler？](#-为什么需要-smart-router-butler)
 - [✨ 核心特性](#-核心特性)
 - [🎯 规则创建 — 三种方式](#-规则创建--三种方式构建你的路由策略)
-- [🏗️ 架构与路由决策链](#%EF%B8%8F-架构与路由决策链)
+- [🔌 OpenAI 兼容本地代理](#-openai-兼容本地代理)
+- [🔍 路由层级详解](#-路由层级详解)
+- [🏗️ 架构概览](#%EF%B8%8F-架构概览)
 - [📸 界面预览](#-界面预览)
 - [🚀 快速开始（自托管）](#-快速开始自托管)
 - [⚙️ 配置说明（摘要）](#%EF%B8%8F-配置说明摘要)
@@ -143,6 +145,8 @@ Smart Router Butler 提供三种创建路由规则的方式，从完全手动到
 
 ---
 
+<p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
+
 ## 🔌 OpenAI 兼容本地代理
 
 Smart Router Butler 专为 **OpenClaw**、**Cursor**、**Continue**、**ChatBox** 等 AI Agent 和开发者工具设计。接入方式：**零插件、零 SDK 修改** — 填入本地 URL 和 Token 即可使用。
@@ -178,6 +182,8 @@ Model:     auto          （由路由器智能决策）
 **所有流量在本地转发**：`Agent → localhost:8080 → 上游 Provider API`。代理运行在你的机器或 Docker 主机上，请求不经过任何第三方网关或外部中转节点。
 
 ---
+
+<p align="right"><a href="#-smart-router-butler">⬆ 回到顶部</a></p>
 
 ## 🔍 路由层级详解
 
