@@ -179,32 +179,7 @@ Model:     auto          （由路由器智能决策）
 
 ## 🔍 路由层级详解
 
-当 `model` 设为 `auto` 时，请求依次经过五个决策层。第一个命中的层级立即返回结果，未命中则传递到下一层。
-
-<div align="center">
-<img src="./docs/images/mermaid-routing-cn.jpg" alt="路由决策流程" />
-</div>
-
-<details>
-<summary>Mermaid 源码（桌面端 GitHub 可交互渲染）</summary>
-
-```mermaid
-graph TD
-    Req["传入请求"] --> L0{"L0: 精确缓存"}
-    L0 -->|"命中 (Redis GET)"| Done["返回缓存响应"]
-    L0 -->|未命中| L05{"L0.5: 语义缓存"}
-    L05 -->|"命中 (余弦相似度 >= 0.95)"| Done
-    L05 -->|未命中| L1{"L1: 规则引擎"}
-    L1 -->|"命中 (用户规则)"| Resolve["解析 Provider 并分发"]
-    L1 -->|未命中| L2{"L2: 语义路由"}
-    L2 -->|"命中 (余弦相似度 >= 0.85)"| Resolve
-    L2 -->|未命中| L3{"L3: 本地模型仲裁"}
-    L3 -->|匹配| Resolve
-    L3 -->|未命中| Fallback["兜底：第一个启用的模型"]
-    Fallback --> Resolve
-```
-
-</details>
+当 `model` 设为 `auto` 时，请求依次经过五个决策层。第一个命中的层级立即返回结果，未命中则传递到下一层。完整流程图参见[架构概览](#%EF%B8%8F-架构概览)。
 
 ### L0 — 精确缓存
 

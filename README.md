@@ -88,7 +88,7 @@ Smart Router Butler provides three distinct approaches to creating routing rules
 Build rules visually through the web dashboard — no code required. Define conditions based on task type, keywords, token count, model preferences, and more; set priority, target model, and up to 3 fallback models per rule. Rules take effect immediately via hot-reload.
 
 <div align="center">
-<img src="./docs/images/screenshot-rule-editor.png" alt="Custom Rule Editor" />
+<img src="./docs/images/screenshot-rule-editor.png" alt="Custom Rule Editor" loading="lazy" />
 </div>
 
 **Example — Route coding tasks to a code-specialized model:**
@@ -108,7 +108,7 @@ Once saved, any request classified as a coding task automatically goes to the co
 Describe your routing intent in plain language, and the built-in LLM translates it into structured rules automatically. Ideal for users who know what they want but prefer not to configure fields manually.
 
 <div align="center">
-<img src="./docs/images/screenshot-nl-generator.png" alt="Natural Language Rule Generator" />
+<img src="./docs/images/screenshot-nl-generator.png" alt="Natural Language Rule Generator" loading="lazy" />
 </div>
 
 **Example prompts:**
@@ -126,7 +126,7 @@ Type a sentence, click **Generate rules**, and the system produces one or more r
 A 5-step interactive wizard that walks you through your use cases, preferred providers, budget, and priorities — then automatically generates a complete initial rule set tailored to your needs.
 
 <div align="center">
-<img src="./docs/images/screenshot-ai-wizard.png" alt="AI Rule Wizard" />
+<img src="./docs/images/screenshot-ai-wizard.png" alt="AI Rule Wizard" loading="lazy" />
 </div>
 
 **Wizard steps:**
@@ -179,32 +179,7 @@ Model:     auto          (let the router decide)
 
 ## 🔍 Routing Layers Deep Dive
 
-When `model` is set to `auto`, the request passes through five decision layers in order. The first layer to produce a match wins. Each miss passes control to the next layer.
-
-<div align="center">
-<img src="./docs/images/mermaid-routing-en.jpg" alt="Routing Decision Flow" />
-</div>
-
-<details>
-<summary>Mermaid source (interactive on GitHub desktop)</summary>
-
-```mermaid
-graph TD
-    Req["Incoming Request"] --> L0{"L0: Exact Cache"}
-    L0 -->|"hit (Redis GET)"| Done["Return cached response"]
-    L0 -->|miss| L05{"L0.5: Semantic Cache"}
-    L05 -->|"hit (cosine >= 0.95)"| Done
-    L05 -->|miss| L1{"L1: Rule Engine"}
-    L1 -->|"hit (user rules)"| Resolve["Resolve provider + dispatch"]
-    L1 -->|miss| L2{"L2: Semantic Route"}
-    L2 -->|"hit (cosine >= 0.85)"| Resolve
-    L2 -->|miss| L3{"L3: Local Model Arbiter"}
-    L3 -->|match| Resolve
-    L3 -->|miss| Fallback["Fallback: first enabled model"]
-    Fallback --> Resolve
-```
-
-</details>
+When `model` is set to `auto`, the request passes through five decision layers in order. The first layer to produce a match wins. Each miss passes control to the next layer. See the flow diagram in [Architecture Overview](#%EF%B8%8F-architecture-overview).
 
 ### L0 — Exact Cache
 
@@ -257,7 +232,7 @@ If all layers miss, the system selects the **first enabled model** from the data
 ## 🏗️ Architecture Overview
 
 <div align="center">
-<img src="./docs/images/mermaid-arch-en.jpg" alt="Architecture Overview" />
+<img src="./docs/images/mermaid-arch-en.jpg" alt="Architecture Overview" loading="lazy" />
 </div>
 
 <details>
@@ -292,19 +267,19 @@ graph TD
 
 | Routing Rules | Natural Language Rule Generator |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-rules.png" /> | <img src="./docs/images/screenshot-nl-generator.png" /> |
+| <img src="./docs/images/screenshot-rules.png" loading="lazy" /> | <img src="./docs/images/screenshot-nl-generator.png" loading="lazy" /> |
 
 | Rule Hit Analysis | Rule Editor |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-hit-analysis.png" /> | <img src="./docs/images/screenshot-rule-editor.png" /> |
+| <img src="./docs/images/screenshot-hit-analysis.png" loading="lazy" /> | <img src="./docs/images/screenshot-rule-editor.png" loading="lazy" /> |
 
 | AI Rule Wizard | Request Logs |
 |:---:|:---:|
-| <img src="./docs/images/screenshot-ai-wizard.png" /> | <img src="./docs/images/screenshot-request-logs.png" /> |
+| <img src="./docs/images/screenshot-ai-wizard.png" loading="lazy" /> | <img src="./docs/images/screenshot-request-logs.png" loading="lazy" /> |
 
 | Raw JSON Editor |
 |:---:|
-| <img src="./docs/images/screenshot-raw-json.png" /> |
+| <img src="./docs/images/screenshot-raw-json.png" loading="lazy" /> |
 
 </div>
 
