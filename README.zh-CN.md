@@ -136,10 +136,10 @@
 </details>
 
 <details>
-<summary><b>🔑 API Tokens</b></summary>
+<summary><b>🔑 本地代理地址与 AI Agent 专用 API Key</b></summary>
 <br>
 <div align="center">
-<img src="./docs/images/screenshot-api-tokens.png" alt="API Token 管理" loading="lazy" />
+<img src="./docs/images/screenshot-api-tokens.png" alt="本地代理 Base URL 与 AI Agent / 开发者工具专用 API Key" loading="lazy" />
 </div>
 </details>
 

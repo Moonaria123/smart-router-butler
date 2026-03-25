@@ -136,10 +136,10 @@ Click any category to browse screenshots.
 </details>
 
 <details>
-<summary><b>🔑 API Tokens</b></summary>
+<summary><b>🔑 Local Proxy Base URL & API Keys for AI Agents</b></summary>
 <br>
 <div align="center">
-<img src="./docs/images/screenshot-api-tokens.png" alt="API token management" loading="lazy" />
+<img src="./docs/images/screenshot-api-tokens.png" alt="Local proxy base URL and API keys for AI agents and developer tools" loading="lazy" />
 </div>
 </details>
 
