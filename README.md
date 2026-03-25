@@ -68,9 +68,9 @@ When using AI agents (OpenClaw, Cursor, Continue, etc.) and IDE-assisted coding 
 
 ## ✨ Core Features
 
-- **Drop-in OpenAI-compatible proxy** — Exposes standard `POST /v1/chat/completions` and `GET /v1/models` endpoints on your local network. Any tool that supports OpenAI API (OpenClaw, Cursor, Continue, ChatBox, etc.) works out of the box — just set the base URL and API token. **No plugins, no browser extensions, no SDK changes.** All traffic stays on your local network and never passes through any external gateway.
+- **Drop-in OpenAI-compatible proxy** — Exposes standard `POST /v1/chat/completions` and `GET /v1/models` endpoints on your local network. Any tool that supports OpenAI API (OpenClaw, Cursor, Continue, ChatBox, etc.) works out of the box — just set the base URL and API token. **No plugins, no browser extensions, no SDK changes.** All traffic stays on your local network and never passes through any external gateway. See [OpenAI-Compatible Local Proxy](#-openai-compatible-local-proxy) for details.
 - **Multi-layer intelligent routing** — L0 (exact cache) + L0.5 (semantic cache) + L1 (user-defined rules) + L2 (semantic matching) + L3 (local model arbitration) — five-layer decision chain for precise task-to-model matching. See [Routing Layers Deep Dive](#-routing-layers-deep-dive) for details.
-- **Flexible rule creation** — Define your own L1 routing rules via a visual editor, or let AI do it for you: describe your intent in natural language, or use the AI questionnaire wizard to auto-generate a complete rule set in minutes.
+- **Flexible rule creation** — Define your own L1 routing rules via a visual editor, or let AI do it for you: describe your intent in natural language, or use the AI questionnaire wizard to auto-generate a complete rule set in minutes. See [Rule Creation — Three Ways](#-rule-creation--three-ways-to-build-your-routing-strategy) for details.
 - **Significant cost reduction** — Offload simple tasks to local models or cheap APIs; reserve flagship models for complex tasks only.
 - **High availability & auto-fallback** — Built-in circuit breaker and fallback chains. When the primary model times out or errors, traffic automatically shifts to backups.
 - **Full observability** — Beautiful Next.js web dashboard with request logs, token usage, rule hit analysis at a glance.
